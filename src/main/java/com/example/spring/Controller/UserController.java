@@ -1,8 +1,8 @@
 package com.example.spring.Controller;
 
 import com.example.spring.Service.UserService;
-import dto.CreateUserDto;
-import dto.EditUserDto;
+import com.example.spring.dto.CreateUserDto;
+import com.example.spring.dto.EditUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

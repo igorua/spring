@@ -1,8 +1,8 @@
 package com.example.spring.Service;
 
-import dto.CreateUserDto;
-import dto.EditUserDto;
-import dto.GetUserDto;
+import com.example.spring.dto.CreateUserDto;
+import com.example.spring.dto.EditUserDto;
+import com.example.spring.dto.GetUserDto;
 
 import java.util.List;
 

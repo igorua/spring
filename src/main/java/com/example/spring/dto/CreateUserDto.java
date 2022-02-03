@@ -1,4 +1,4 @@
-package dto;
+package com.example.spring.dto;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class EditUserDto {
+public class CreateUserDto {
     private String name;
     private String surname;
     private Integer age;

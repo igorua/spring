@@ -4,10 +4,10 @@ import com.example.spring.Service.UserService;
 import com.example.spring.dao.Entity.User;
 import com.example.spring.dao.Repository.UserRepository;
 import com.example.spring.exception.UserDoesNotExistException;
-import dto.CreateUserDto;
-import dto.EditUserDto;
-import dto.GetUserDto;
-import dto.LocationInfoDto;
+import com.example.spring.dto.CreateUserDto;
+import com.example.spring.dto.EditUserDto;
+import com.example.spring.dto.GetUserDto;
+import com.example.spring.dto.LocationInfoDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

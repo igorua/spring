@@ -1,4 +1,4 @@
-package dto;
+package com.example.spring.dto;
 
 import lombok.*;
 @Getter
