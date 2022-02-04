@@ -3,13 +3,14 @@ package com.example.spring.ServiceImpl;
 import com.example.spring.Service.UserService;
 import com.example.spring.dao.Entity.User;
 import com.example.spring.dao.Repository.UserRepository;
-import com.example.spring.exception.UserDoesNotExistException;
 import com.example.spring.dto.CreateUserDto;
 import com.example.spring.dto.EditUserDto;
 import com.example.spring.dto.GetUserDto;
 import com.example.spring.dto.LocationInfoDto;
+import com.example.spring.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
                         .collect(Collectors.toList())).build();
     }
 
-    public GetUserDto getUserById(Long id){
+    public GetUserDto getUserById(Long id) {
         return getUserDto(findUserById(id));
     }
 
@@ -69,11 +70,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id){
+    public void deleteUser(Long id) {
         userRepository.delete(findUserById(id));
     }
 
-    private User findUserById(Long id){
-        return userRepository.findById(id).orElseThrow(() -> new UserDoesNotExistException("User with id: " + id + "does not exist"));
+    private User findUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new UserDoesNotExistException("User with id: " + id + " does not exist"));
     }
 }

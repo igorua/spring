@@ -4,14 +4,14 @@ import lombok.*;
 
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class LocationInfoDto {
-    private Long id;
-    private String name;
+public class AddLocationDto {
+    private String locationName;
     private Double longitude;
     private Double latitude;
+    private String regionName;
 }

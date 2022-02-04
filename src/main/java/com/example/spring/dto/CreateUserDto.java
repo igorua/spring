@@ -2,8 +2,11 @@ package com.example.spring.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Builder
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="https://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Adding new User</title>
+    <title>Edit user</title>
 </head>
-<header th:include="header.html"></header>
+<header th:insert="header.html"></header>
 <body>
-<form th:method="post" th:action="@{/user}" th:object="${dto}">
+<form th:method="PATCH" th:action="@{/user/{id}/update(id = ${user.getId()})}" th:object="${user}">
     <table>
         <tr>
             <td><label for="name">Enter your name: </label></td>
@@ -21,11 +21,8 @@
             <td><input type="number" th:field="*{age}" id="age" min="1" max="120"/></td>
         </tr>
         <tr>
-            <td><input type="submit" value="Create new User"/></td>
+            <td><input type="submit" value="Update"/></td>
             <td><input type="reset" value="Clear"></td>
         </tr>
-
-    </table>
-</form>
 </body>
 </html>

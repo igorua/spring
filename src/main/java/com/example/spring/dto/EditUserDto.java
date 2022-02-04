@@ -3,6 +3,7 @@ package com.example.spring.dto;
 import lombok.*;
 
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
