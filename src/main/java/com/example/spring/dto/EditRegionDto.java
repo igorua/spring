@@ -9,8 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class CreateUserDto {
+public class EditRegionDto {
     private String name;
-    private String surname;
-    private Integer age;
 }

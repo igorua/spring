@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Location info</title>
+</head>
+<header th:insert="header.html"></header>
+<body>
+<table>
+    <tr>
+        <th>
+            <p>Id:</p>
+        </th>
+        <th>
+            <p>Location name: </p>
+        </th>
+    </tr>
+    <tr th:each="region : ${regions} ">
+        <td>
+            <p th:text="${region.getId()}"></p>
+        </td>
+        <td>
+            <p th:text="${region.getName()}"></p>
+        </td>
+        <td>
+            <a th:href="@{/region/{id}(id=${region.getId()})}"><button>Info</button></a>
+        </td>
+        <td>
+            <a th:href="@{/region/{id}/update(id=${region.getId()})}"><button>Edit</button></a>
+        </td>
+        <td>
+            <form th:method="delete" th:action="@{/region/{id}/delete(id=${region.getId()})}">
+                <input type="submit" value="delete region">
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

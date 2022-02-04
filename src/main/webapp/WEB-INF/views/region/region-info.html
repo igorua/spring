@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Info about region</title>
+</head>
+<header th:insert="header.html"></header>
+<body>
+<table th:object="${region}">
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+    </tr>
+    <tr>
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+    </tr>
+</table>
+</body>
+</html>
