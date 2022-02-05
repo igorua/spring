@@ -16,5 +16,5 @@ public class GetUserDto {
     private String name;
     private String surname;
     private Integer age;
-    private List<LocationInfoDto> locationInfoDtoList;
+    private LocationInfoDto locationInfoDto;
 }

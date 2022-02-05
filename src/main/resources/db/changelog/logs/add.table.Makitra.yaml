@@ -75,31 +75,12 @@ databaseChangeLog:
               - column:
                   name: age
                   type: integer
-
-  - changeSet:
-      id: 4
-      author: Vadym Makitra
-      changes:
-        - createTable:
-            tableName: user_locations
-            columns:
               - column:
                   name: location_id
                   type: bigint
-              - column:
-                  name: user_id
-                  type: bigint
-
         - addForeignKeyConstraint:
-            baseTableName: user_locations
+            baseTableName: users
             baseColumnNames: location_id
             referencedTableName: locations
             referencedColumnNames: id
-            constraintName: fk_courier_locations_location
-
-        - addForeignKeyConstraint:
-            baseTableName: user_locations
-            baseColumnNames: user_id
-            referencedTableName: users
-            referencedColumnNames: id
-            constraintName: fk_courier_locations_user
+            constraintName: fk_user_location

@@ -26,13 +26,6 @@ public class User {
     @Column
     private Integer age;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_locations",
-            joinColumns = @JoinColumn(name = "location_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    List<Location> locations;
-
-    public String getFullName(){
-        return name + surname;
-    }
+    @ManyToOne
+    Location location;
 }

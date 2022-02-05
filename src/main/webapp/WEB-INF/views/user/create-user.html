@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="https://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>Adding new User</title>
@@ -19,6 +19,16 @@
         <tr>
             <td><label for="age">Enter your age here: </label></td>
             <td><input type="number" th:field="*{age}" id="age" min="1" max="120"/></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="location">Chose you location: </label>
+                <select id="location" th:field="*{locationId}">
+                    <option value="" selected>----SELECT CITY----</option>
+                    <option th:each="location : ${locations}" th:value="${location.id}" th:text="${location.name}">
+                    </option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td><input type="submit" value="Create new User"/></td>

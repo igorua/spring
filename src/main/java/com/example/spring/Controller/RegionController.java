@@ -23,7 +23,7 @@ public class RegionController {
     }
 
     @PostMapping
-    public String createRegion(Model model, @ModelAttribute("dto") AddRegionDto dto){
+    public String createRegion(@ModelAttribute("dto") AddRegionDto dto){
         regionService.addNewRegion(dto);
         return "redirect:/region/all";
     }

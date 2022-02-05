@@ -26,8 +26,8 @@ public class Location {
     @Column
     private Double latitude;
 
-    @ManyToMany(mappedBy = "locations")
-    private List<User> user;
+    @OneToMany(mappedBy = "location")
+    private List<User> users;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Region region;

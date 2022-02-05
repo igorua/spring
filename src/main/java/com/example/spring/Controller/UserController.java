@@ -1,5 +1,6 @@
 package com.example.spring.Controller;
 
+import com.example.spring.Service.LocationService;
 import com.example.spring.Service.UserService;
 import com.example.spring.dto.CreateUserDto;
 import com.example.spring.dto.EditUserDto;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final LocationService locationService;
 
     @GetMapping("/create")
     public String newUser(Model model) {
         CreateUserDto dto = new CreateUserDto();
         model.addAttribute("dto", dto);
+        model.addAttribute("locations",locationService.getAllLocation());
         return "user/create-user";
     }
 

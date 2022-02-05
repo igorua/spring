@@ -1,7 +1,6 @@
 package com.example.spring.config;
 
 import com.example.spring.SpringApplication;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

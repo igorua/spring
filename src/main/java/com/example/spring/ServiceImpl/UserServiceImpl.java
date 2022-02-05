@@ -2,6 +2,7 @@ package com.example.spring.ServiceImpl;
 
 import com.example.spring.Service.UserService;
 import com.example.spring.dao.Entity.User;
+import com.example.spring.dao.Repository.LocationRepository;
 import com.example.spring.dao.Repository.UserRepository;
 import com.example.spring.dto.CreateUserDto;
 import com.example.spring.dto.EditUserDto;
@@ -10,7 +11,6 @@ import com.example.spring.dto.LocationInfoDto;
 import com.example.spring.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final LocationRepository locationRepository;
 
     @Override
     public void addUser(CreateUserDto dto) {
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
         user.setName(dto.getName());
         user.setSurname(dto.getSurname());
         user.setAge(dto.getAge());
+        user.setLocation(locationRepository.findById(dto.getLocationId()).orElseThrow());
         return user;
     }
 
@@ -49,11 +51,13 @@ public class UserServiceImpl implements UserService {
                 .age(user.getAge())
                 .name(user.getName())
                 .surname(user.getSurname())
-                .locationInfoDtoList(user.getLocations().stream()
-                        .map(location -> new LocationInfoDto(
-                                location.getId(), location.getName(),
-                                location.getLongitude(), location.getLatitude()))
-                        .collect(Collectors.toList())).build();
+                .locationInfoDto(LocationInfoDto.builder()
+                        .id(user.getId())
+                        .name(user.getName())
+                        .latitude(user.getLocation().getLatitude())
+                        .longitude(user.getLocation().getLongitude())
+                        .build())
+                .build();
     }
 
     public GetUserDto getUserById(Long id) {

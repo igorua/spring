@@ -57,19 +57,19 @@ public class RegionServiceImpl implements RegionService {
         regionRepository.delete(region);
     }
 
-    public RegionInfoDto getRegionById(Long id){
+    public RegionInfoDto getRegionById(Long id) {
         RegionInfoDto dto = new RegionInfoDto();
         Region region = regionRepository.findById(id).orElseThrow();
         dto.setId(region.getId());
         dto.setName(region.getName());
         List<LocationInfoDto> dtos = region.getLocations().stream()
                 .map(location -> LocationInfoDto.builder()
-                .longitude(location.getLongitude())
-                .latitude(location.getLatitude())
-                .name(location.getName())
-                .id(location.getId())
-                .build()).collect(Collectors.toList());
+                        .longitude(location.getLongitude())
+                        .latitude(location.getLatitude())
+                        .name(location.getName())
+                        .id(location.getId())
+                        .build()).collect(Collectors.toList());
         dto.setLocationInfoDtoList(dtos);
-    return dto;
+        return dto;
     }
 }

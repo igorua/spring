@@ -6,14 +6,20 @@
 </head>
 <header th:insert="header.html"></header>
 <body>
-<table th:object="${region}">
+<table th:object="${region}" >
     <tr>
         <th>id</th>
         <th>Name</th>
+        <th>All locations: </th>
     </tr>
     <tr>
         <td th:text="*{id}"></td>
         <td th:text="*{name}"></td>
+        <td>
+            <select>
+            <option th:each="location : ${region.getLocationInfoDtoList()}" th:text="${location}"></option>
+            </select>
+        </td>
     </tr>
 </table>
 </body>

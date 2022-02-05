@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Location Info</title>
+</head>
+<body>
+<header th:insert="header.html"></header>
+<table th:object="${location}">
+    <tr>
+        <th>
+            id:
+        </th>
+        <th>
+            Location name:
+        </th>
+        <th>
+            Longitude:
+        </th>
+        <th>
+            Latitude:
+        </th>
+    </tr>
+    <tr>
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{longitude}"></td>
+        <td th:text="*{latitude}"></td>
+    </tr>
+</table>
+</body>
+</html>
