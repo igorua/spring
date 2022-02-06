@@ -7,11 +7,15 @@ import com.example.spring.dto.EditUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@Validated
 public class UserController {
     private final UserService userService;
     private final LocationService locationService;
@@ -25,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping()
-    public String createUser(@ModelAttribute("dto") CreateUserDto dto) {
+    public String createUser(@Valid @ModelAttribute("dto") CreateUserDto dto) {
         userService.addUser(dto);
         return "redirect:/user/all";
     }
@@ -51,7 +55,7 @@ public class UserController {
     }
 
     @PostMapping("/{id}/update")
-    public String editUserById(@PathVariable("id") Long id, @ModelAttribute("dto") EditUserDto dto) {
+    public String editUserById(@PathVariable("id") Long id, @Valid @ModelAttribute("dto") EditUserDto dto) {
         userService.editUser(id, dto);
         return "redirect:/user/all";
     }

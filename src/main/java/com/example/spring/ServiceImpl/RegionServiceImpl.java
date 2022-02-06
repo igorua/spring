@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class RegionServiceImpl implements RegionService {
     private final RegionRepository regionRepository;
 
+    @Override
     public void addNewRegion(AddRegionDto dto) {
         Region region = mapDtoToRegion(dto);
         regionRepository.save(region);
@@ -29,6 +30,7 @@ public class RegionServiceImpl implements RegionService {
         return region;
     }
 
+    @Override
     public List<RegionInfoDto> getAllRegions() {
         List<Region> regionList = regionRepository.findAll();
         return regionList.stream().map(region -> RegionInfoDto.builder()
@@ -46,17 +48,20 @@ public class RegionServiceImpl implements RegionService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public void editRegion(Long id, EditRegionDto dto) {
         Region region = regionRepository.findById(id).orElseThrow();
         region.setName(dto.getName());
         regionRepository.save(region);
     }
 
+    @Override
     public void deleteRegion(Long id) {
         Region region = regionRepository.findById(id).orElseThrow();
         regionRepository.delete(region);
     }
 
+    @Override
     public RegionInfoDto getRegionById(Long id) {
         RegionInfoDto dto = new RegionInfoDto();
         Region region = regionRepository.findById(id).orElseThrow();

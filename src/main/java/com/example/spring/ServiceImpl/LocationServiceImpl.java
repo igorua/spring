@@ -85,5 +85,4 @@ public class LocationServiceImpl implements LocationService {
         location.setLatitude(dto.getLatitude()!=null?dto.getLatitude():location.getLatitude());
         locationRepository.save(location);
     }
-
 }

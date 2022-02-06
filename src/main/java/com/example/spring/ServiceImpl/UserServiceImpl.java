@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -52,8 +51,8 @@ public class UserServiceImpl implements UserService {
                 .name(user.getName())
                 .surname(user.getSurname())
                 .locationInfoDto(LocationInfoDto.builder()
-                        .id(user.getId())
-                        .name(user.getName())
+                        .id(user.getLocation().getId())
+                        .name(user.getLocation().getName())
                         .latitude(user.getLocation().getLatitude())
                         .longitude(user.getLocation().getLongitude())
                         .build())

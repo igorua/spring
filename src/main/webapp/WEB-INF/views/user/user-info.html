@@ -12,12 +12,14 @@
         <th>Name</th>
         <th>Surname</th>
         <th>Age</th>
+        <th>User location</th>
     </tr>
     <tr>
         <td th:text="*{id}"></td>
         <td th:text="*{name}"></td>
         <td th:text="*{surname}"></td>
         <td th:text="*{age}"></td>
+        <td th:text="${user.getLocationInfoDto().getName()}"></td>
     </tr>
 </table>
 </body>

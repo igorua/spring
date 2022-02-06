@@ -13,17 +13,19 @@
             <th>Name</th>
             <th>Surname</th>
             <th>Age</th>
+            <th>User location: </th>
         </tr>
         <tr>
             <td th:text="${user.getId()}"></td>
             <td th:text="${user.getName()}"></td>
             <td th:text="${user.getSurname()}"></td>
             <td th:text="${user.getAge()}"></td>
+            <td th:text="${user.getLocationInfoDto().getName()}"></td>
             <td><a th:href="@{/user/{id}(id = ${user.getId()})}"><button>Info about user</button></a></td>
             <td><a th:href="@{/user/{id}/update(id=${user.getId()})}"><button>Update user</button></a></td>
             <td>
                 <form th:method="delete" th:action="@{/user/{id}/delete(id = ${user.getId()})}">
-                    <input type="submit" value="delete chosen user">
+                    <input type="submit" value="Delete">
                 </form>
             </td>
         </tr>

@@ -10,26 +10,28 @@
     <table>
         <tr>
             <td><label for="name">Enter location name: </label></td>
-            <td><input type="text" th:field="*{locationName}" id="name"></td>
+            <td><input type="text" th:field="*{locationName}" id="name" required></td>
         </tr>
         <tr>
             <td><label for="latitude">Enter latitude here: </label></td>
-            <td><input type="number" step="0.01" th:field="*{latitude}" id="latitude"></td>
+            <td><input type="number" step="0.01" th:field="*{latitude}" id="latitude" required></td>
         </tr>
         <tr>
             <td>
                 <label for="longitude">Enter longitude here:</label>
             </td>
             <td>
-                <input type="number" step="0.01" th:field="*{longitude}" id="longitude">
+                <input type="number" step="0.01" th:field="*{longitude}" id="longitude" required>
             </td>
         </tr>
         <tr>
-            <td>
-                <label for="id">Enter regionID here:</label>
-            </td>
-            <td>
-                <input type="number" th:field="*{regionId}" id="id">
+            <td><label for="location">Chose location</label></td>
+            <td><select th:field="*{regionId}" id="location" required>
+                <option value="">----SELECT REGION----</option>
+                <option th:each="region : ${regions}" th:value="${region.getId()}" th:text="${region.getName()}">
+
+                </option>
+            </select>
             </td>
         </tr>
         <tr>
