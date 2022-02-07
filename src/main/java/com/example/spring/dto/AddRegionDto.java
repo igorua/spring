@@ -2,7 +2,6 @@ package com.example.spring.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 @Getter

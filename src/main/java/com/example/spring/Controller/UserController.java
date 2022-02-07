@@ -24,7 +24,7 @@ public class UserController {
     public String newUser(Model model) {
         CreateUserDto dto = new CreateUserDto();
         model.addAttribute("dto", dto);
-        model.addAttribute("locations",locationService.getAllLocation());
+        model.addAttribute("locations", locationService.getAllLocation());
         return "user/create-user";
     }
 

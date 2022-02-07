@@ -10,15 +10,15 @@
     <table>
         <tr>
             <td><label for="name">Enter your name: </label></td>
-            <td><input type="text" th:field="*{name}" id="name" required></td>
+            <td><input type="text" th:field="*{name}" id="name" required pattern="A-Za-zА-Яа-яёЁЇїІіЄєҐґ"></td>
         </tr>
         <tr>
             <td><label for="surname">Enter your surname: </label></td>
-            <td><input type="text" th:field="*{surname}" id="surname" required/></td>
+            <td><input type="text" th:field="*{surname}" id="surname" required pattern="A-Za-zА-Яа-яёЁЇїІіЄєҐґ"/></td>
         </tr>
         <tr>
             <td><label for="age">Enter your age here: </label></td>
-            <td><input type="number" th:field="*{age}" id="age" min="1" max="120" required/></td>
+            <td><input type="number" th:field="*{age}" id="age" min="1" max="120" required pattern="[0-9]"/></td>
         </tr>
         <tr>
             <td>

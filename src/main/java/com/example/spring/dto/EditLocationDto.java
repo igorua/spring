@@ -3,7 +3,6 @@ package com.example.spring.dto;
 import lombok.*;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 

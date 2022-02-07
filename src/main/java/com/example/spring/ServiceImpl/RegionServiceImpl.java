@@ -7,6 +7,7 @@ import com.example.spring.dto.AddRegionDto;
 import com.example.spring.dto.EditRegionDto;
 import com.example.spring.dto.LocationInfoDto;
 import com.example.spring.dto.RegionInfoDto;
+import com.example.spring.exception.RegionDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -50,21 +51,24 @@ public class RegionServiceImpl implements RegionService {
 
     @Override
     public void editRegion(Long id, EditRegionDto dto) {
-        Region region = regionRepository.findById(id).orElseThrow();
+        Region region = regionRepository.findById(id).orElseThrow(() -> new RegionDoesNotExistException(
+                "Region with id: " + id + " does not exist"));
         region.setName(dto.getName());
         regionRepository.save(region);
     }
 
     @Override
     public void deleteRegion(Long id) {
-        Region region = regionRepository.findById(id).orElseThrow();
+        Region region = regionRepository.findById(id).orElseThrow(() -> new RegionDoesNotExistException(
+                "Region with id: " + id + " does not exist"));
         regionRepository.delete(region);
     }
 
     @Override
     public RegionInfoDto getRegionById(Long id) {
         RegionInfoDto dto = new RegionInfoDto();
-        Region region = regionRepository.findById(id).orElseThrow();
+        Region region = regionRepository.findById(id).orElseThrow(() -> new RegionDoesNotExistException(
+                "Region with id: " + id + " does not exist"));
         dto.setId(region.getId());
         dto.setName(region.getName());
         List<LocationInfoDto> dtos = region.getLocations().stream()

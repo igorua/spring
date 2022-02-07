@@ -3,9 +3,7 @@ package com.example.spring.dto;
 import lombok.*;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.util.List;
 
 @Getter
 @Setter

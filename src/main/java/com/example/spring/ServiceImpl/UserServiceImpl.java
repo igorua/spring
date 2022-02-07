@@ -8,6 +8,7 @@ import com.example.spring.dto.CreateUserDto;
 import com.example.spring.dto.EditUserDto;
 import com.example.spring.dto.GetUserDto;
 import com.example.spring.dto.LocationInfoDto;
+import com.example.spring.exception.LocationDoesNotExistException;
 import com.example.spring.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,8 @@ public class UserServiceImpl implements UserService {
         user.setName(dto.getName());
         user.setSurname(dto.getSurname());
         user.setAge(dto.getAge());
-        user.setLocation(locationRepository.findById(dto.getLocationId()).orElseThrow());
+        user.setLocation(locationRepository.findById(dto.getLocationId()).orElseThrow(() -> new LocationDoesNotExistException(
+                "Location with id: " + dto.getLocationId() + " does not exist")));
         return user;
     }
 

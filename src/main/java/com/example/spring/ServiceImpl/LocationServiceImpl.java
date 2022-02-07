@@ -8,6 +8,8 @@ import com.example.spring.dao.Repository.RegionRepository;
 import com.example.spring.dto.AddLocationDto;
 import com.example.spring.dto.EditLocationDto;
 import com.example.spring.dto.LocationInfoDto;
+import com.example.spring.exception.LocationDoesNotExistException;
+import com.example.spring.exception.RegionDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +38,9 @@ public class LocationServiceImpl implements LocationService {
         }
         Region region = new Region();
         region.setName(dto.getRegionName());
-        Region region1 = regionRepository.findById(dto.getRegionId()).isPresent() ? regionRepository.findById(dto.getRegionId()).orElseThrow() : region;
+        Region region1 = regionRepository.findById(dto.getRegionId()).isPresent() ? regionRepository.findById(dto.getRegionId()).orElseThrow(
+                () -> new RegionDoesNotExistException("Region with id " + dto.getRegionId() + " does not exist")
+        ) : region;
         location.setRegion(region1);
         return location;
     }
@@ -70,19 +74,21 @@ public class LocationServiceImpl implements LocationService {
     }
 
     private Location findLocationByID(Long id) {
-        return locationRepository.findById(id).orElseThrow();
+        return locationRepository.findById(id).orElseThrow(() -> new LocationDoesNotExistException(
+                "Location with id: " + id + " does not exist"));
     }
 
     @Override
     public void deleteLocationByID(Long id) {
-        locationRepository.delete(locationRepository.findById(id).orElseThrow());
+        locationRepository.delete(locationRepository.findById(id).orElseThrow(() -> new LocationDoesNotExistException(
+                "Location with id: " + id + " does not exist")));
     }
 
-    public void updateLocation(Long id, EditLocationDto dto){
+    public void updateLocation(Long id, EditLocationDto dto) {
         Location location = findLocationByID(id);
-        location.setName(dto.getName()!=null ? dto.getName() : location.getName());
-        location.setLongitude(dto.getLongitude()!=null ? dto.getLongitude() : location.getLongitude());
-        location.setLatitude(dto.getLatitude()!=null?dto.getLatitude():location.getLatitude());
+        location.setName(dto.getName() != null ? dto.getName() : location.getName());
+        location.setLongitude(dto.getLongitude() != null ? dto.getLongitude() : location.getLongitude());
+        location.setLatitude(dto.getLatitude() != null ? dto.getLatitude() : location.getLatitude());
         locationRepository.save(location);
     }
 }

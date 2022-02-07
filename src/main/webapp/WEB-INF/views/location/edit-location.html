@@ -11,18 +11,18 @@
         <table>
             <tr>
                 <td><label for="name">Enter location name: </label></td>
-                <td><input type="text" th:field="*{name}" id="name" required></td>
+                <td><input type="text" th:field="*{name}" id="name" required pattern="A-Za-zА-Яа-яёЁЇїІіЄєҐґ"></td>
             </tr>
             <tr>
                 <td><label for="latitude">Enter latitude here: </label></td>
-                <td><input type="number" step="0.01" th:field="*{latitude}" id="latitude" required></td>
+                <td><input type="number" step="0.01" th:field="*{latitude}" id="latitude" required pattern="[0-9"></td>
             </tr>
             <tr>
                 <td>
                     <label for="longitude">Enter longitude here:</label>
                 </td>
                 <td>
-                    <input type="number" step="0.01" th:field="*{longitude}" id="longitude" required>
+                    <input type="number" step="0.01" th:field="*{longitude}" id="longitude" required pattern="[0-9]">
                 </td>
             </tr>
             <tr>
