@@ -35,7 +35,7 @@ public class RestRegionController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<HttpStatus> updateRegion(@PathVariable("id") Long id, EditRegionDto dto){
+    public ResponseEntity<HttpStatus> updateRegion(@PathVariable("id") Long id,@RequestBody EditRegionDto dto){
         regionService.editRegion(id,dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

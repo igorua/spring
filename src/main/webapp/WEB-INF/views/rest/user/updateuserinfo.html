@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Update info about user</title>
 </head>
-<body onload="allLocation()">
+<body onload="currentUserInfo()">
 <header>
     <a href="/src/main/webapp/WEB-INF/views/rest/region/create-region.html">Create new region</a>
     <a href="/src/main/webapp/WEB-INF/views/rest/location/location-info.html">All locations</a>
@@ -13,29 +13,26 @@
     <a href="/src/main/webapp/WEB-INF/views/rest/region/region-info.html">All Region</a>
     <a href="/src/main/webapp/WEB-INF/views/rest/user/users-info.html">All Users</a>
 </header>
-<div>
+
+<form method="" action="">
     <table>
         <tr>
-            <th style="text-align: center">
-                <p>id:</p>
-            </th>
-            <th style="text-align: center">
-                <p>name:</p>
-            </th>
-            <th style="text-align: center"><p>longitude</p></th>
-            <th style="text-align: center"><p>latitude:</p></th>
+            <td><label for="name">Enter name of new user:</label></td>
+            <td><input id="name" type="text"></td>
         </tr>
-        <tr id ="test">
-            <td id="id" style="text-align: center"></td>
-            <td id="name" style="text-align: center"></td>
-            <td id="latitude" style="text-align: center"></td>
-            <td id="longitude"style="text-align: center"></td>
+        <tr>
+            <td><label for="surname">Enter surname here: </label></td>
+            <td><input id="surname" type="text"></td>
         </tr>
-        <tr id="buttons">
-
+        <tr>
+            <td><label for="age">Enter age: </label></td>
+            <td><input id="age" type="number"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" onclick="updateUser()"></td>
         </tr>
     </table>
-</div>
+</form>
 <script src="../index.js"></script>
 </body>
 </html>

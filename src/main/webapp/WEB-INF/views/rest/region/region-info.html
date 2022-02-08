@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Info about regions</title>
 </head>
-<body onload="allLocation()">
+<body onload="getInfoAboutAllLocation()">
 <header>
     <a href="/src/main/webapp/WEB-INF/views/rest/region/create-region.html">Create new region</a>
     <a href="/src/main/webapp/WEB-INF/views/rest/location/location-info.html">All locations</a>
@@ -16,24 +16,17 @@
 <div>
     <table>
         <tr>
-            <th style="text-align: center">
-                <p>id:</p>
-            </th>
-            <th style="text-align: center">
-                <p>name:</p>
-            </th>
-            <th style="text-align: center"><p>longitude</p></th>
-            <th style="text-align: center"><p>latitude:</p></th>
+            <th>Id</th>
+            <th>Location name:</th>
         </tr>
-        <tr id ="test">
-            <td id="id" style="text-align: center"></td>
-            <td id="name" style="text-align: center"></td>
-            <td id="latitude" style="text-align: center"></td>
-            <td id="longitude"style="text-align: center"></td>
+        <tr>
+            <td id="id"></td>
+            <td id="name"></td>
         </tr>
-        <tr id="buttons">
+        <tr>
 
         </tr>
+
     </table>
 </div>
 <script src="../index.js"></script>

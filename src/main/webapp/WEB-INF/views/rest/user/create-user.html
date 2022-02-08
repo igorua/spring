@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new user</title>
+</head>
+<body onload="createUser()">
+<header>
+    <a href="/src/main/webapp/WEB-INF/views/rest/region/create-region.html">Create new region</a>
+    <a href="/src/main/webapp/WEB-INF/views/rest/location/location-info.html">All locations</a>
+    <a href="/src/main/webapp/WEB-INF/views/rest/user/create-user.html">Create new user</a>
+    <a href="/src/main/webapp/WEB-INF/views/rest/location/create-location.html">Create locations</a>
+    <a href="/src/main/webapp/WEB-INF/views/rest/region/region-info.html">All Region</a>
+    <a href="/src/main/webapp/WEB-INF/views/rest/user/users-info.html">All Users</a>
+</header>
+
+<form method="" action="">
+    <table>
+        <tr>
+            <td><label for="name">Enter name of new user:</label></td>
+            <td><input id="name" type="text"></td>
+        </tr>
+        <tr>
+            <td><label for="surname">Enter surname here: </label></td>
+            <td><input id="surname" type="text"></td>
+        </tr>
+        <tr>
+            <td><label for="age">Enter age: </label></td>
+            <td><input id="age" type="number"></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="locations">Location: </label>
+                <select id="locations" required>
+                    <option value="" selected>&#45;&#45;&#45;&#45;SELECT CITY&#45;&#45;&#45;&#45;</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" onclick="sendUser(click)"></td>
+        </tr>
+    </table>
+</form>
+<script src="../index.js"></script>
+</body>
+</html>

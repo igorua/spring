@@ -18,7 +18,7 @@ public class RestUserController {
     private final UserService userService;
 
     @PostMapping()
-    public ResponseEntity<HttpStatus> createUser(CreateUserDto dto){
+    public ResponseEntity<HttpStatus> createUser(@RequestBody CreateUserDto dto){
         userService.addUser(dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -29,18 +29,17 @@ public class RestUserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<HttpStatus> getOneUser(@PathVariable("id") Long id){
-        userService.getUserById(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<GetUserDto> getOneUser(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<HttpStatus> updateUser(@PathVariable("id") Long id, EditUserDto dto){
+    public ResponseEntity<HttpStatus> updateUser(@PathVariable("id") Long id,@RequestBody EditUserDto dto){
         userService.editUser(id,dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable ("id") Long id){
         userService.deleteUser(id);
         return ResponseEntity.status(HttpStatus.OK).build();

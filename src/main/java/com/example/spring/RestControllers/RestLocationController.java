@@ -18,7 +18,7 @@ public class RestLocationController {
     private final LocationService locationService;
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createLocation(AddLocationDto dto){
+    public ResponseEntity<HttpStatus> createLocation(@RequestBody AddLocationDto dto){
         locationService.addLocation(dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -34,7 +34,7 @@ public class RestLocationController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<HttpStatus> updateLocation(@PathVariable("id") Long id, EditLocationDto dto){
+    public ResponseEntity<HttpStatus> updateLocation(@PathVariable("id") Long id, @RequestBody EditLocationDto dto){
         locationService.updateLocation(id,dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

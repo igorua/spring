@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Info about users</title>
 </head>
-<body>
+<body onload="infoAboutUsers()">
 <header>
     <a href="/src/main/webapp/WEB-INF/views/rest/region/create-region.html">Create new region</a>
     <a href="/src/main/webapp/WEB-INF/views/rest/location/location-info.html">All locations</a>
@@ -13,7 +13,25 @@
     <a href="/src/main/webapp/WEB-INF/views/rest/region/region-info.html">All Region</a>
     <a href="/src/main/webapp/WEB-INF/views/rest/user/users-info.html">All Users</a>
 </header>
-<h1>Welcome to the home page:</h1>
-<script src="index.js"></script>
+<table>
+    <tr>
+        <th>Id:</th>
+        <th>User name:</th>
+        <th>User surname: </th>
+        <th>User location:</th>
+    </tr>
+    <tr>
+        <td id="id">
+        </td>
+        <td id="name">
+        </td>
+        <td id="surname"></td>
+        <td id="locations"></td>
+        <td id="buttons"></td>
+        <td id="button"></td>
+        <td id="deleteButton"></td>
+    </tr>
+</table>
+<script src="../index.js"></script>
 </body>
 </html>
