@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update info about user</title>
+    <title>Update location</title>
 </head>
-<body onload="currentUserInfo()">
+<body onload="getValueAboutLocationForForm()">
 <header>
     <a href="/src/main/webapp/WEB-INF/views/rest/region/create-region.html">Create new region</a>
     <a href="/src/main/webapp/WEB-INF/views/rest/location/location-info.html">All locations</a>
@@ -13,23 +13,30 @@
     <a href="/src/main/webapp/WEB-INF/views/rest/region/region-info.html">All Region</a>
     <a href="/src/main/webapp/WEB-INF/views/rest/user/users-info.html">All Users</a>
 </header>
-
-<form method="" action="">
+<form>
     <table>
         <tr>
-            <td><label for="name">Enter name of new user:</label></td>
-            <td><input id="name" type="text" required></td>
+            <td>
+                <label for="name">Enter here new name: </label>
+                <input id="name" type="text" required>
+            </td>
         </tr>
         <tr>
-            <td><label for="surname">Enter surname here: </label></td>
-            <td><input id="surname" type="text" required></td>
+            <td>
+                <label for="latitude">Enter here new latitude: </label>
+                <input id="latitude" type="number" step="0.01" min="0.01" required>
+            </td>
         </tr>
         <tr>
-            <td><label for="age">Enter age: </label></td>
-            <td><input id="age" type="number" required min="1"></td>
+            <td>
+                <label for="longitude">Enter here longitude</label>
+                <input id="longitude" type="number" step="0.01" min="0.01" required>
+            </td>
         </tr>
         <tr>
-            <td><input type="submit" onclick="updateUser()"></td>
+            <td>
+                <input type="button" id="button" value="Update" onclick="updateCurrentLocation()">
+            </td>
         </tr>
     </table>
 </form>

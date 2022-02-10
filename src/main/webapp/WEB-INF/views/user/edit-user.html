@@ -10,11 +10,11 @@
     <table>
         <tr>
             <td><label for="name">Enter your name: </label></td>
-            <td><input type="text" th:field="*{name}" id="name" pattern="A-Za-zА-Яа-яёЁЇїІіЄєҐґ"></td>
+            <td><input type="text" th:field="*{name}" id="name"></td>
         </tr>
         <tr>
             <td><label for="surname">Enter your surname: </label></td>
-            <td><input type="text" th:field="*{surname}" id="surname" pattern="A-Za-zА-Яа-яёЁЇїІіЄєҐґ"/></td>
+            <td><input type="text" th:field="*{surname}" id="surname"/></td>
         </tr>
         <tr>
             <td><label for="age">Enter your age here: </label></td>
@@ -24,5 +24,7 @@
             <td><input type="submit" value="Update"/></td>
             <td><input type="reset" value="Clear"></td>
         </tr>
+    </table>
+</form>
 </body>
 </html>

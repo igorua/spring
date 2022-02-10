@@ -8,18 +8,21 @@ import jdk.jfr.ContentType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 @RequestMapping("/rest/region")
 public class RestRegionController {
     private final RegionService regionService;
 
     @PostMapping()
-    public ResponseEntity<HttpStatus> createRegion(@RequestBody AddRegionDto dto){
+    public ResponseEntity<HttpStatus> createRegion(@Valid  @RequestBody AddRegionDto dto){
         regionService.addNewRegion(dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -35,13 +38,14 @@ public class RestRegionController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<HttpStatus> updateRegion(@PathVariable("id") Long id,@RequestBody EditRegionDto dto){
+    public ResponseEntity<HttpStatus> updateRegion(@PathVariable("id") Long id,@Valid @RequestBody EditRegionDto dto){
         regionService.editRegion(id,dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteRegion(@PathVariable("id") Long id){
+        regionService.deleteRegion(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

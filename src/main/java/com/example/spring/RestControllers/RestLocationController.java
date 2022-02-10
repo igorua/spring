@@ -7,18 +7,21 @@ import com.example.spring.dto.LocationInfoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rest/location")
+@Validated
 public class RestLocationController {
     private final LocationService locationService;
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createLocation(@RequestBody AddLocationDto dto){
+    public ResponseEntity<HttpStatus> createLocation(@Valid @RequestBody AddLocationDto dto){
         locationService.addLocation(dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -34,12 +37,12 @@ public class RestLocationController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<HttpStatus> updateLocation(@PathVariable("id") Long id, @RequestBody EditLocationDto dto){
+    public ResponseEntity<HttpStatus> updateLocation(@PathVariable("id") Long id,@Valid @RequestBody EditLocationDto dto){
         locationService.updateLocation(id,dto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteLocation(@PathVariable("id") Long id){
         locationService.deleteLocationByID(id);
         return ResponseEntity.status(HttpStatus.OK).build();

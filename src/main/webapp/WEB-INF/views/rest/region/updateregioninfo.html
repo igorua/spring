@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Info about regions</title>
+    <title>Update region info</title>
 </head>
-<body onload="getInfoAboutAllRegion()">
+<body onload="getRegionForUpdate()">
 <header>
     <a href="/src/main/webapp/WEB-INF/views/rest/region/create-region.html">Create new region</a>
     <a href="/src/main/webapp/WEB-INF/views/rest/location/location-info.html">All locations</a>
@@ -13,21 +13,22 @@
     <a href="/src/main/webapp/WEB-INF/views/rest/region/region-info.html">All Region</a>
     <a href="/src/main/webapp/WEB-INF/views/rest/user/users-info.html">All Users</a>
 </header>
-<div>
+<form>
     <table>
+
         <tr>
-            <th>Id</th>
-            <th>Location name:</th>
+            <td>
+                <label for="name"> Enter you name here: </label>
+                <input id="name">
+            </td>
         </tr>
         <tr>
-            <td id="id"></td>
-            <td id="name"></td>
-            <td id="button"></td>
-            <td id="updateButton"></td>
-            <td id="deleteButton"></td>
+            <td>
+                <input type="submit" onclick="updateRegion()">
+            </td>
         </tr>
     </table>
-</div>
+</form>
 <script src="../index.js"></script>
 </body>
 </html>
