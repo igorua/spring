@@ -9,5 +9,6 @@ and set up the name and password from user in your db;
 6. For run front-end part in you're pc should be installed nodeJs and npm module
 7. In project folder open terminal and execute the command: npm install http-server
 8. For run local http server execute command in terminal: http-server 
-9. Open one from available link: ![img_1.png](img_1.png)
-10. When link was opened you should move to the next path: 'src/main/webapp/WEB-INF/views/rest' 
+9. Open one from available link: 
+![img_1.png](img_1.png)
+01. When link was opened you should move to the next path: 'src/main/webapp/WEB-INF/views/rest' 
