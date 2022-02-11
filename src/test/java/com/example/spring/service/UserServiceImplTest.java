@@ -120,6 +120,32 @@ class UserServiceImplTest {
     }
 
     @Test
+    void editUserWithoutDataFromDto() {
+        User user = Models.getUser();
+        EditUserDto dto = new EditUserDto();
+
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        when(userRepository.save(user)).thenReturn(user);
+
+        userService.editUser(user.getId(), dto);
+
+        verify(userRepository).findById(user.getId());
+        verify(userRepository).save(user);
+    }
+
+    @Test
+    void editUserThrowsException() {
+        User user = Models.getUser();
+        EditUserDto dto = Models.getEditUserDto();
+
+        when(userRepository.findById(user.getId())).thenReturn(Optional.empty());
+
+        assertThrows(UserDoesNotExistException.class,()->userService.editUser(user.getId(), dto));
+
+        verify(userRepository).findById(user.getId());
+    }
+
+    @Test
     void deleteUser(){
         User user = Models.getUser();
 

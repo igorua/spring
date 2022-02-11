@@ -39,8 +39,7 @@ public class LocationServiceImpl implements LocationService {
         }
         Region region = new Region();
         region.setName(dto.getRegionName());
-        Region region1 = regionRepository.findById(dto.getRegionId()).isPresent() ? regionRepository.findById(dto.getRegionId()).orElseThrow(
-                () -> new RegionDoesNotExistException("Region with id " + dto.getRegionId() + " does not exist")) : region;
+        Region region1 = regionRepository.findById(dto.getRegionId()).isPresent() ? regionRepository.findById(dto.getRegionId()).get() : region;
         location.setRegion(region1);
         return location;
     }

@@ -8,6 +8,7 @@ import com.example.spring.dao.Repository.RegionRepository;
 import com.example.spring.dto.AddLocationDto;
 import com.example.spring.dto.EditLocationDto;
 import com.example.spring.dto.LocationInfoDto;
+import com.example.spring.exception.LocationDoesNotExistException;
 import com.example.spring.exception.RegionDoesNotExistException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -90,6 +91,16 @@ class LocationServiceImplTest {
     }
 
     @Test
+    void getLocationByIdThrowsException(){
+        Location location = Models.createLocation();
+        LocationInfoDto dto = Models.getLocationInfoDto();
+
+        when(locationRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        assertThrows(LocationDoesNotExistException.class,()->locationService.getLocationById(anyLong()));
+    }
+
+    @Test
     void deleteLocationById(){
         Location location = Models.createLocation();
 
@@ -102,9 +113,32 @@ class LocationServiceImplTest {
     }
 
     @Test
+    void deleteLocationByIdThrowsException(){
+        Location location = Models.createLocation();
+
+        when(locationRepository.findById(location.getId())).thenReturn(Optional.empty());
+
+        assertThrows(LocationDoesNotExistException.class,()->locationService.deleteLocationByID(location.getId()));
+
+        verify(locationRepository).findById(location.getId());
+    }
+
+    @Test
     void updateLocationById(){
         Location location = Models.createLocation();
         EditLocationDto dto = Models.editLocationDto();
+
+        when(locationRepository.findById(location.getId())).thenReturn(Optional.of(location));
+
+        locationService.updateLocation(location.getId(),dto);
+
+        verify(locationRepository).findById(location.getId());
+    }
+
+    @Test
+    void updateLocationByIdWithoutEnteredData(){
+        Location location = Models.createLocation();
+        EditLocationDto dto = new EditLocationDto();
 
         when(locationRepository.findById(location.getId())).thenReturn(Optional.of(location));
 

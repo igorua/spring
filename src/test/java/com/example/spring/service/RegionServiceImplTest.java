@@ -6,6 +6,7 @@ import com.example.spring.dao.Repository.RegionRepository;
 import com.example.spring.dto.AddRegionDto;
 import com.example.spring.dto.EditRegionDto;
 import com.example.spring.dto.RegionInfoDto;
+import com.example.spring.exception.RegionDoesNotExistException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -67,6 +69,19 @@ class RegionServiceImplTest {
     }
 
     @Test
+    void editRegionThrowsException(){
+        Region region = Models.getRegion();
+        EditRegionDto editRegionDto = Models.getEditRegionDto();
+        region.setName(editRegionDto.getName());
+
+        when(regionRepository.findById(region.getId())).thenReturn(Optional.empty());
+
+        assertThrows(RegionDoesNotExistException.class,()->regionService.editRegion(region.getId(),editRegionDto));
+
+
+    }
+
+    @Test
     void deleteRegion(){
         Region region = Models.getRegion();
 
@@ -79,6 +94,18 @@ class RegionServiceImplTest {
     }
 
     @Test
+    void deleteRegionThrowsException(){
+        Region region = Models.getRegion();
+
+        when(regionRepository.findById(region.getId())).thenReturn(Optional.empty());
+
+        assertThrows(RegionDoesNotExistException.class,()->regionService.deleteRegion(region.getId()));
+
+        verify(regionRepository).findById(region.getId());
+
+    }
+
+    @Test
     void  getRegionById(){
         RegionInfoDto dto = Models.getRegionINfoDto();
         Region region = Models.getRegionInf();
@@ -86,5 +113,14 @@ class RegionServiceImplTest {
         when(regionRepository.findById(region.getId())).thenReturn(Optional.of(region));
 
         assertEquals(dto,regionService.getRegionById(region.getId()));
+    }
+
+    @Test
+    void  getRegionByIdThrowsException(){
+        Region region = Models.getRegionInf();
+
+        when(regionRepository.findById(region.getId())).thenReturn(Optional.empty());
+
+        assertThrows(RegionDoesNotExistException.class,()->regionService.getRegionById(region.getId()));
     }
 }
