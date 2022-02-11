@@ -11,4 +11,5 @@ and set up the name and password from user in your db;
 8. For run local http server execute command in terminal: http-server 
 9. Open one from available link: 
 ![img_1.png](img_1.png)
-01. When link was opened you should move to the next path: 'src/main/webapp/WEB-INF/views/rest' 
+10. When link was opened you should move to the next path: 'src/main/webapp/WEB-INF/views/rest' 
+11. For get coverage information open console amd execute mvn test, after that you can find report in next directory: target/site/jacoco/index.html
