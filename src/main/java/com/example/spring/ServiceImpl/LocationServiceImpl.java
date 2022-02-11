@@ -13,6 +13,7 @@ import com.example.spring.exception.RegionDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,8 +40,7 @@ public class LocationServiceImpl implements LocationService {
         Region region = new Region();
         region.setName(dto.getRegionName());
         Region region1 = regionRepository.findById(dto.getRegionId()).isPresent() ? regionRepository.findById(dto.getRegionId()).orElseThrow(
-                () -> new RegionDoesNotExistException("Region with id " + dto.getRegionId() + " does not exist")
-        ) : region;
+                () -> new RegionDoesNotExistException("Region with id " + dto.getRegionId() + " does not exist")) : region;
         location.setRegion(region1);
         return location;
     }

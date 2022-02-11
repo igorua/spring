@@ -398,6 +398,7 @@ function redirectUserForUpdateLocation(indent){
 }
 
 function getValueAboutLocationForForm(){
+    if(navigator.onLine){
     fetch('http://localhost:8070/rest/location/' + localStorage.getItem('id'))
         .then(resp => resp.json())
         .then(resp => {
@@ -405,15 +406,21 @@ function getValueAboutLocationForForm(){
             latitude.value = resp.latitude;
             longitude.value = resp.longitude;
         })
+    }else {
+        alert('UPS! Something went wrong')
+    }
+
 }
 
 function deleteLocation(ident) {
-    fetch('http://localhost:8070/rest/location/' + ident, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(() => window.location.reload(), error => {
-        alert('UPS! smth went wrong...')
-    });
+    if(navigator.onLine) {
+        fetch('http://localhost:8070/rest/location/' + ident, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }else {
+        alert('UPS! Something went wrong');
+    }
 }

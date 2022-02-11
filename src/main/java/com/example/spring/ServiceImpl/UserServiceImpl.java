@@ -13,8 +13,8 @@ import com.example.spring.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -40,29 +40,42 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<GetUserDto> getUser() {
-        List<User> users = userRepository.findAll();
-        List<GetUserDto> userDtos = new ArrayList<>();
-        users.forEach(user -> userDtos.add(getUserDto(user)));
-        return userDtos;
+        return userRepository.findAll().stream()
+                .map(user -> GetUserDto.builder()
+                        .id(user.getId())
+                        .name(user.getName())
+                        .surname(user.getSurname())
+                        .age(user.getAge())
+                        .locationInfoDto(LocationInfoDto.builder()
+                                .id(user.getLocation().getId())
+                                .name(user.getLocation().getName())
+                                .latitude(user.getLocation().getLatitude())
+                                .longitude(user.getLocation().getLongitude())
+                                .build())
+                        .build()).collect(Collectors.toList());
     }
 
-    private GetUserDto getUserDto(User user) {
+
+    public GetUserDto getUserById(Long id) {
+        return mapUserToGetUserDto(id);
+    }
+
+    private GetUserDto mapUserToGetUserDto(Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UserDoesNotExistException("User with " + id + " does not exist"));
         return GetUserDto.builder()
                 .id(user.getId())
                 .age(user.getAge())
                 .name(user.getName())
                 .surname(user.getSurname())
                 .locationInfoDto(LocationInfoDto.builder()
-                        .id(user.getLocation().getId())
                         .name(user.getLocation().getName())
-                        .latitude(user.getLocation().getLatitude())
+                        .id(user.getLocation().getId())
                         .longitude(user.getLocation().getLongitude())
+                        .latitude(user.getLocation().getLatitude())
                         .build())
                 .build();
-    }
 
-    public GetUserDto getUserById(Long id) {
-        return getUserDto(findUserById(id));
     }
 
     @Override

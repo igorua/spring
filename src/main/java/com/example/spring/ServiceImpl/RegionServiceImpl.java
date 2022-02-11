@@ -33,8 +33,8 @@ public class RegionServiceImpl implements RegionService {
 
     @Override
     public List<RegionInfoDto> getAllRegions() {
-        List<Region> regionList = regionRepository.findAll();
-        return regionList.stream().map(region -> RegionInfoDto.builder()
+        return regionRepository.findAll().stream()
+                .map(region -> RegionInfoDto.builder()
                         .id(region.getId())
                         .name(region.getName())
                         .locationInfoDtoList(region.getLocations().stream().map(
@@ -77,7 +77,8 @@ public class RegionServiceImpl implements RegionService {
                         .latitude(location.getLatitude())
                         .name(location.getName())
                         .id(location.getId())
-                        .build()).collect(Collectors.toList());
+                        .build())
+                .collect(Collectors.toList());
         dto.setLocationInfoDtoList(dtos);
         return dto;
     }
