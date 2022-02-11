@@ -12,7 +12,6 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@ToString
 public class LocationInfoDto {
     @Min(1)
     private Long id;
@@ -23,10 +22,10 @@ public class LocationInfoDto {
     @DecimalMin("0.01")
     private Double latitude;
 
-/*    @Override
+    @Override
     public String toString() {
         return "name='" + name + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude;
-    }*/
+    }
 }
