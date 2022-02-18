@@ -12,4 +12,5 @@ and set up the name and password from user in your db;
 9. Open one from available link: 
 ![img_1.png](img_1.png)
 10. When link was opened you should move to the next path: 'src/main/webapp/WEB-INF/views/rest' 
-11. For get coverage information open console amd execute mvn test, after that you can find report in next directory: target/site/jacoco/index.html
+11. For success running integration test's should be created schema in database with name: mvc_test
+12. For get coverage information open console amd execute mvn test, after that you can find report in next directory: target/site/jacoco/index.html

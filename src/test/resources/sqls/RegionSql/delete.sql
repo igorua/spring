@@ -1,0 +1,1 @@
+delete from mvc_test.regions;
