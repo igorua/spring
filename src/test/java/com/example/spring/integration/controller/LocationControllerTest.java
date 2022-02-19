@@ -3,7 +3,10 @@ package com.example.spring.integration.controller;
 import com.example.spring.RestControllers.RestLocationController;
 import com.example.spring.dto.AddLocationDto;
 import com.example.spring.dto.EditLocationDto;
+import com.example.spring.dto.LocationInfoDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.JSONArray;
+import net.minidev.json.parser.JSONParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import util.Models;
 
+import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -47,14 +54,26 @@ public class LocationControllerTest {
 
     @Test
     public void getAllLocations() throws Exception {
+        List<LocationInfoDto> dtos = Models.allLocationDtoIntegration();
+        JSONParser jsonParser= new JSONParser(JSONParser.DEFAULT_PERMISSIVE_MODE);
+        ObjectMapper om = new ObjectMapper();
+        String resp = om.writeValueAsString(dtos);
+        JSONArray listJson = (JSONArray) jsonParser.parse(resp);
+
         this.mockMvc.perform(get(locationLink + "/all"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[*]").value(listJson));
     }
 
     @Test
     public void getLocationById() throws Exception {
+        List<LocationInfoDto> dtos = Models.allLocationDtoIntegration();
         this.mockMvc.perform(get(locationLink + "/9"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(dtos.get(8).getId()))
+                .andExpect(jsonPath("$.name").value(dtos.get(8).getName()))
+                .andExpect(jsonPath("$.longitude").value(dtos.get(8).getLongitude()))
+                .andExpect(jsonPath("$.latitude").value(dtos.get(8).getLatitude()));
     }
 
     @Test

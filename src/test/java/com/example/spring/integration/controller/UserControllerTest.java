@@ -3,7 +3,10 @@ package com.example.spring.integration.controller;
 import com.example.spring.RestControllers.RestUserController;
 import com.example.spring.dto.CreateUserDto;
 import com.example.spring.dto.EditUserDto;
+import com.example.spring.dto.GetUserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.JSONArray;
+import net.minidev.json.parser.JSONParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import util.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -46,14 +53,26 @@ public class UserControllerTest {
 
     @Test
     public void getAllUsers() throws Exception {
+        List<GetUserDto> dtos = Models.allUsersIntegration();
+        JSONParser jsonParser = new JSONParser(JSONParser.DEFAULT_PERMISSIVE_MODE);
+        ObjectMapper om = new ObjectMapper();
+        String resp = om.writeValueAsString(dtos);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(resp);
+
         this.mockMvc.perform(get(userLink + "/all"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[*]").value(jsonArray));
     }
 
     @Test
     public void getUserById() throws Exception {
+        List<GetUserDto> dtos = Models.allUsersIntegration();
         this.mockMvc.perform(get(userLink + "/1"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(dtos.get(0).getName()))
+                .andExpect(jsonPath("$.surname").value(dtos.get(0).getSurname()))
+                .andExpect(jsonPath("$.age").value(dtos.get(0).getAge()))
+                .andExpect(jsonPath("$.locationInfoDto").value(dtos.get(0).getLocationInfoDto()));
     }
 
     @Test

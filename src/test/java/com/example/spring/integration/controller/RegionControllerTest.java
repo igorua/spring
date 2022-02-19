@@ -3,7 +3,10 @@ package com.example.spring.integration.controller;
 import com.example.spring.RestControllers.RestRegionController;
 import com.example.spring.dto.AddRegionDto;
 import com.example.spring.dto.EditRegionDto;
+import com.example.spring.dto.RegionInfoDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.JSONArray;
+import net.minidev.json.parser.JSONParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +19,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import util.Models;
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -48,15 +52,22 @@ public class RegionControllerTest {
 
     @Test
     public void getAllRegions() throws Exception {
+        List<RegionInfoDto> dtos = Models.allRegionsIntegration();
+        JSONParser jsonParser = new JSONParser(JSONParser.DEFAULT_PERMISSIVE_MODE);
+        ObjectMapper om = new ObjectMapper();
+        String resp = om.writeValueAsString(dtos);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(resp);
         this.mockMvc.perform(get(regionLink + "/all"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("{\"id\":1")));
+                .andExpect(jsonPath("$.[*]").value(jsonArray));
     }
 
     @Test
     public void getRegionById() throws Exception {
+        List<RegionInfoDto> dtos = Models.allRegionsIntegration();
         this.mockMvc.perform(get(regionLink + "/3"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(dtos.get(2).getName()));
     }
 
     @Test
